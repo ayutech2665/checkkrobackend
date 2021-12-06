@@ -39,5 +39,7 @@ public class CarDetails {
 	@OneToMany(targetEntity = Battery.class , cascade = CascadeType.ALL)
 	@JoinColumn(name = "car_id" , referencedColumnName = "car_id")
 	private List<Battery> battery;
+	
+	
 
 }

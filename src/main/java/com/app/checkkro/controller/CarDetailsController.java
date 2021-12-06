@@ -26,6 +26,9 @@ public class CarDetailsController {
 	@Autowired
 	CarDetailsRepository carDetailsServiceRepository;
 	
+	@Autowired
+	TyreRepository tyreRepository;
+	
 	@GetMapping("/cardetails")
 	public List<CarDetails> getCars() {
 		return carDetailsServiceRepository.findAll();
@@ -43,6 +46,36 @@ public class CarDetailsController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PostMapping("/cardetails/updatetyres")
+	public  List<Tyre> updatecartyredetails(@RequestBody List<Tyre> tyres) {
+
+		try {
+			List<Tyre> t = tyreRepository.saveAll(tyres);
+			return t;
+		} catch (Exception e) {
+			System.out.println("error" + e.getMessage());
+			return null;
+			
+		}
+	}
+	
+	@GetMapping("/cardetails/deletetyres/{tyresize}/{cartyrename}/{carid}")
+	public void deleteCartyreDetails(@PathVariable String tyresize, @PathVariable String cartyrename,
+			@PathVariable int carid) {
+
+		try {
+
+			tyreRepository.deleteCartyreDetails(tyresize, cartyrename, carid);
+
+		} catch (Exception e) {
+			System.out.println("error"+ e.getMessage());
+
+		}
+
+	}
+
+	
 	
 
 }
