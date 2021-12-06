@@ -137,6 +137,55 @@ public class CarDetailsController {
 	}
 	
 	
+	@GetMapping("/cardetails/getAllCarCompany")
+	public List<String> getAllCarCompanyName() {
+
+		try {
+
+			List<String> t = carDetailsServiceRepository.getAllCarCompanyName();
+			return t;
+
+		} catch (Exception e) {
+			System.out.println("error"+ e.getMessage());
+			return null;
+
+		}
+
+	}
+	
+	@GetMapping("/cardetails/getAllCarByCarCompany/{company}")
+	public List<String> getAllCarByCarCompany(@PathVariable String company) {
+
+		try {
+
+			List<String> t = carDetailsServiceRepository.getAllCarByCarCompany(company);
+			return t;
+
+		} catch (Exception e) {
+			System.out.println("error"+ e.getMessage());
+			return null;
+
+		}
+
+	}
+	
+	@GetMapping("/cardetails/getCarDetails/{carname}")
+	public CarDetails getCarDetails(@PathVariable String carname) {
+
+		try {
+
+			CarDetails t = carDetailsServiceRepository.getCarDetails(carname);
+			return t;
+
+		} catch (Exception e) {
+			System.out.println("error"+ e.getMessage());
+			return null;
+
+		}
+
+	}
+	
+	
 	
 
 }
