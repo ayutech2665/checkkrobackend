@@ -40,6 +40,4 @@ public class CarDetails {
 	@JoinColumn(name = "car_id" , referencedColumnName = "car_id")
 	private List<Battery> battery;
 	
-	
-
 }

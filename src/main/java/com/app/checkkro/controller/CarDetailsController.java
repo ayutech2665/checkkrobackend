@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.checkkro.entity.Battery;
 import com.app.checkkro.entity.CarDetails;
 import com.app.checkkro.entity.Tyre;
+import com.app.checkkro.repository.BatteryRepository;
 import com.app.checkkro.repository.CarDetailsRepository;
 import com.app.checkkro.repository.TyreRepository;
 
@@ -28,6 +30,9 @@ public class CarDetailsController {
 	
 	@Autowired
 	TyreRepository tyreRepository;
+	
+	@Autowired
+	BatteryRepository batteryRepository;
 	
 	@GetMapping("/cardetails")
 	public List<CarDetails> getCars() {
@@ -60,6 +65,21 @@ public class CarDetailsController {
 		}
 	}
 	
+	@PostMapping("/cardetails/updatetyre")
+	public Tyre updatecartyredetail(@RequestBody Tyre tyres) {
+
+		try {
+			Tyre t = tyreRepository.save(tyres);
+			return t;
+		} catch (Exception e) {
+			System.out.println("error" + e.getMessage());
+			return null;
+			
+		}
+	}
+	
+	
+	
 	@GetMapping("/cardetails/deletetyres/{tyresize}/{cartyrename}/{carid}")
 	public void deleteCartyreDetails(@PathVariable String tyresize, @PathVariable String cartyrename,
 			@PathVariable int carid) {
@@ -74,7 +94,48 @@ public class CarDetailsController {
 		}
 
 	}
+	
+	@PostMapping("/cardetails/updatebatteries")
+	public  List<Battery> updatecarbatterydetails(@RequestBody List<Battery> batteries) {
 
+		try {
+			List<Battery> t = batteryRepository.saveAll(batteries);
+			return t;
+		} catch (Exception e) {
+			System.out.println("error" + e.getMessage());
+			return null;
+			
+		}
+	}
+	
+	@PostMapping("/cardetails/updatebattery")
+	public  Battery updatecarbatterydetail(@RequestBody Battery battery) {
+
+		try {
+			Battery t = batteryRepository.save(battery);
+			return t;
+		} catch (Exception e) {
+			System.out.println("error" + e.getMessage());
+			return null;
+			
+		}
+	}
+
+	@GetMapping("/cardetails/deletebattery/{batterycompany}/{carid}")
+	public void deleteCarbatteryDetails(@PathVariable String batterycompany,
+			@PathVariable int carid) {
+
+		try {
+
+			batteryRepository.deleteCarbatteryDetails(batterycompany, carid);
+
+		} catch (Exception e) {
+			System.out.println("error"+ e.getMessage());
+
+		}
+
+	}
+	
 	
 	
 

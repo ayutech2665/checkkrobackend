@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Entity
 @Table(name = "car_battery_details")
@@ -24,5 +22,23 @@ public class Battery {
 	private int battery_id;
 	private String battery_company_name;
 	private String battery_power;
-
+	private int car_id;
+	
+	public Battery() {
+		
+	}
+	
+	public Battery(int battery_id, String battery_company_name, String battery_power) {
+		super();
+		this.battery_id = battery_id;
+		this.battery_company_name = battery_company_name;
+		this.battery_power = battery_power;
+	}
+	
+	public Battery(int car_id, String battery_company_name) {
+		super();
+		this.car_id = car_id;
+		this.battery_company_name = battery_company_name;
+	}
+		
 }
